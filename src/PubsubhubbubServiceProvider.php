@@ -2,7 +2,7 @@
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
-class ServiceProvider extends LaravelServiceProvider {
+class PubsubhubbubServiceProvider extends LaravelServiceProvider {
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -18,7 +18,7 @@ class ServiceProvider extends LaravelServiceProvider {
      */
     public function boot() {
 
-        $this->handleConfigs();
+        //$this->handleConfigs();
         // $this->handleMigrations();
         // $this->handleViews();
         // $this->handleTranslations();
