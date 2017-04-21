@@ -1,7 +1,14 @@
 <?php
 
-/**
- * Your package config would go here
- */
-
-return [];
+return array(
+ /*
+  |--------------------------------------------------------------------------
+  | Actor/user settings
+  |--------------------------------------------------------------------------
+  |
+  | The path to the actor/user model
+  |
+  */
+  'actor_model' => 'App\User',
+  'activity_model' => 'Ortegacmanuel\ActivitystreamsLaravel\Activity'
+);

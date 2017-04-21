@@ -1,6 +1,9 @@
-<?php namespace Vendor\Package;
+<?php 
+
+namespace Ortegacmanuel\PubsubhubbubLaravel;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
+use Ortegacmanuel\ActivitystreamsLaravel\Activity;
 
 class PubsubhubbubServiceProvider extends LaravelServiceProvider {
 
@@ -18,11 +21,13 @@ class PubsubhubbubServiceProvider extends LaravelServiceProvider {
      */
     public function boot() {
 
-        //$this->handleConfigs();
-        // $this->handleMigrations();
+        $this->handleConfigs();
+        $this->handleMigrations();
         // $this->handleViews();
         // $this->handleTranslations();
-        // $this->handleRoutes();
+        $this->handleRoutes();
+
+        Activity::observe(ActivityObserver::class);        
     }
 
     /**
@@ -48,11 +53,11 @@ class PubsubhubbubServiceProvider extends LaravelServiceProvider {
 
     private function handleConfigs() {
 
-        $configPath = __DIR__ . '/../config/packagename.php';
+        $configPath = __DIR__ . '/../config/pubsubhubbub-laravel.php';
 
-        $this->publishes([$configPath => config_path('packagename.php')]);
+        $this->publishes([$configPath => config_path('pubsubhubbub-laravel.php')]);
 
-        $this->mergeConfigFrom($configPath, 'packagename');
+        $this->mergeConfigFrom($configPath, 'pubsubhubbub-laravel');
     }
 
     private function handleTranslations() {
@@ -67,13 +72,13 @@ class PubsubhubbubServiceProvider extends LaravelServiceProvider {
         $this->publishes([__DIR__.'/../views' => base_path('resources/views/vendor/packagename')]);
     }
 
-    private function handleMigrations() {
-
-        $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')]);
+    private function handleMigrations() 
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../migrations');
     }
 
-    private function handleRoutes() {
-
-        include __DIR__.'/../routes.php';
+    private function handleRoutes() 
+    {
+        $this->loadRoutesFrom(__DIR__.'/../routes.php');
     }
 }
